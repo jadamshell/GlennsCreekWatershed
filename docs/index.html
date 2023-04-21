@@ -1,0 +1,119 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iframe Dropdown</title>
+    <style>
+        /* Your styles here */
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="dropdown">
+            <select id="analyte-dropdown" onchange="changeIframe()">
+                <option value="">Select an Analyte...</option>
+                <optgroup label="Bacteria">
+                    <option value="Escherichia coli">Escherichia coli</option>
+                </optgroup>
+                <optgroup label="Bulk">
+                    <option value="Biochemical Oxygen Demand, 5-Day Carbonaceous">Biochemical Oxygen Demand, 5-Day Carbonaceous</option>
+                    <option value="Turbidity">Turbidity</option>
+                    <option value="Total Dissolved Solids">Total Dissolved Solids</option>
+                    <option value="Total Suspended Solids">Total Suspended Solids</option>
+                    <option value="Chloride">Chloride</option>
+                    <option value="Fluoride">Fluoride</option>
+                    <option value="Bromide">Bromide</option>
+                    <option value="Nitrate (as N)">Nitrate (as N)</option>
+                    <option value="Nitrite (as N)">Nitrite (as N)</option>
+                    <option value="Sulfate">Sulfate</option>
+                    <option value="Orthophosphate (as P)">Orthophosphate (as P)</option>
+                </optgroup>
+                <optgroup label="Nutrient">
+                    <option value="Ammonia (as N)">Ammonia (as N)</option>
+                    <option value="Total Kjeldahl Nitrogen (TKN)">Total Kjeldahl Nitrogen (TKN)</option>
+                    <option value="Total Organic Carbon">Total Organic Carbon</option>
+                    <option value="Total Phosphorus (as P)">Total Phosphorus (as P)</option>
+                </optgroup>
+                <optgroup label="Metals">
+                    <option value="Aluminum">Aluminum</option>
+                    <option value="Antimony">Antimony</option>
+                    <option value="Arsenic">Arsenic</option>
+                    <option value="Barium">Barium</option>
+                    <option value="Calcium">Calcium</option>
+                    <option value="Chromium">Chromium</option>
+                    <option value="Cobalt">Cobalt</option>
+                    <option value="Copper">Copper</option>
+                    <option value="Iron">Iron</option>
+                    <option value="Lead">Lead</option>
+                    <option value="Magnesium">Magnesium</option>
+                    <option value="Manganese">Manganese</option>
+                    <option value="Molybdenum">Molybdenum</option>
+                    <option value="Nickel">Nickel</option>
+                    <option value="Potassium">Potassium</option>
+                    <option value="Selenium">Selenium</option>
+                    <option value="Silver">Silver</option>
+                    <option value="Sodium">Sodium</option>
+                    <option value="Titanium">Titanium</option>
+                    <option value="Vanadium">Vanadium</option>
+                    <option value="Zinc">Zinc</option>
+                    <option value="Mercury">Mercury</option>
+                </optgroup>
+            </select>
+        </div>
+        <div id="iframe-container" style="margin-top: 1rem;">
+</div>
+</div>
+<script>
+const iframes = {
+    "Total Organic Carbon": "https://flo.uri.sh/visualisation/13491257/embed",
+    "Escherichia coli": "https://flo.uri.sh/visualisation/13491275/embed",
+    "Chloride": "https://flo.uri.sh/visualisation/13491217/embed",
+    "Total Suspended Solids": "https://flo.uri.sh/visualisation/13491212/embed",
+    "Total Dissolved Solids": "https://flo.uri.sh/visualisation/13491211/embed",
+    "Total Kjeldahl Nitrogen (TKN)": "https://flo.uri.sh/visualisation/13491255/embed",
+    "Biochemical Oxygen Demand, 5-Day Carbonaceous": "https://flo.uri.sh/visualisation/13491182/embed",
+    "Aluminum": "https://flo.uri.sh/visualisation/13491267/embed",
+    "Antimony": "https://flo.uri.sh/visualisation/13495765/embed",
+    "Arsenic": "https://flo.uri.sh/visualisation/13495805/embed",
+    "Barium": "https://flo.uri.sh/visualisation/13495890/embed",
+    "Calcium": "https://flo.uri.sh/visualisation/13495924/embed",
+    "Chromium": "https://flo.uri.sh/visualisation/13496260/embed",
+    "Cobalt": "https://flo.uri.sh/visualisation/13496066/embed",
+    "Copper": "https://flo.uri.sh/visualisation/13496204/embed",
+    "Iron": "https://flo.uri.sh/visualisation/13496508/embed",
+    "Lead": "https://flo.uri.sh/visualisation/13496522/embed",
+    "Magnesium": "https://flo.uri.sh/visualisation/13496536/embed",
+    "Manganese": "https://flo.uri.sh/visualisation/13496550/embed",
+    "Molybdenum": "https://flo.uri.sh/visualisation/13496559/embed",
+    "Nickel": "https://flo.uri.sh/visualisation/13496568/embed",
+    "Potassium": "https://flo.uri.sh/visualisation/13496594/embed",
+    "Selenium": "https://flo.uri.sh/visualisation/13496616/embed",
+    "Silver": "https://flo.uri.sh/visualisation/13496621/embed",
+    "Sodium": "https://flo.uri.sh/visualisation/13496632/embed",
+    "Titanium": "https://flo.uri.sh/visualisation/13496643/embed",
+    "Vanadium": "https://flo.uri.sh/visualisation/13496655/embed",
+    "Zinc": "https://flo.uri.sh/visualisation/13496670/embed",
+    "Mercury": "https://flo.uri.sh/visualisation/13496684/embed"
+};
+
+function changeIframe() {
+    const selectedAnalyte = document.getElementById("analyte-dropdown").value;
+    const iframeContainer = document.getElementById("iframe-container");
+
+    if (selectedAnalyte) {
+        const iframeSrc = iframes[selectedAnalyte];
+
+        if (iframeSrc) {
+            iframeContainer.innerHTML = `<iframe src="${iframeSrc}" frameborder="0" scrolling="no" width="100%" height="600" style="margin-top: 1rem;"></iframe>`;
+        } else {
+            iframeContainer.innerHTML = "";
+        }
+    } else {
+        iframeContainer.innerHTML = "";
+    }
+}
+</script>
+</body>
+</html>
